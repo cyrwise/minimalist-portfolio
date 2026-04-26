@@ -9,7 +9,53 @@ const fadeUp = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
 };
 
+// Helper function to fetch icons for technology tags
+const getTagIcon = (tag: string) => {
+  const icons: Record<string, string> = {
+    'SWIFT': 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/swift/swift-original.svg',
+    'SWIFTUI': 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/swift/swift-original.svg',
+    'FIREBASE': 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/firebase/firebase-plain.svg',
+    'NODE.JS': 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg',
+    'REACT': 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg',
+    'PYTHON': 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg',
+    'FASTAPI': 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/fastapi/fastapi-original.svg',
+    'POSTGRES': 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg',
+    'OPENCV': 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/opencv/opencv-original.svg',
+    'FLASK': 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/flask/flask-original.svg',
+    'C++': 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/cplusplus/cplusplus-original.svg',
+    'TENSORFLOW': 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tensorflow/tensorflow-original.svg',
+    'DOCKER': 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg'
+  };
+  return icons[tag] || null;
+};
+
 export default function Home() {
+  // Group consecutive experiences from the same company
+  const groupedExperiences = experiences.reduce((acc: any[], current: any) => {
+    const last = acc[acc.length - 1];
+    if (last && last.company === current.company) {
+      last.roles.push({ 
+        id: current.id, 
+        role: current.role, 
+        date: current.date, 
+        description: current.description 
+      });
+    } else {
+      acc.push({
+        company: current.company,
+        image: current.image,
+        link: current.link,
+        roles: [{ 
+          id: current.id, 
+          role: current.role, 
+          date: current.date, 
+          description: current.description 
+        }]
+      });
+    }
+    return acc;
+  }, []);
+
   return (
     <main className="pb-12 text-offWhite font-sans">
       
@@ -48,10 +94,10 @@ export default function Home() {
               <span className="text-sm font-bold text-offWhite group-hover:text-redAccent transition-colors">LinkedIn</span>
               <span className="bg-[#0077b5] text-white text-[10px] px-2 py-0.5 rounded-full font-bold ml-1 shadow-lg tracking-wider">19K+</span>
             </a>
-            <a href="https://twitter.com/yourhandle" target="_blank" rel="noreferrer" className="flex items-center gap-2 bg-offWhite/5 border border-offWhite/10 hover:border-redAccent px-4 py-2 rounded-full transition-all group">
+            {/* <a href="https://twitter.com/cyrwise" target="_blank" rel="noreferrer" className="flex items-center gap-2 bg-offWhite/5 border border-offWhite/10 hover:border-redAccent px-4 py-2 rounded-full transition-all group">
               <svg className="w-4 h-4 text-offWhite group-hover:text-redAccent transition-colors" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.008 5.936H5.08z" /></svg>
               <span className="text-sm font-bold text-offWhite group-hover:text-redAccent transition-colors">Twitter</span>
-            </a>
+            </a> */}
             <a href="https://github.com/cyrwise" target="_blank" rel="noreferrer" className="flex items-center gap-2 bg-offWhite/5 border border-offWhite/10 hover:border-redAccent px-4 py-2 rounded-full transition-all group">
               <svg className="w-4 h-4 text-offWhite group-hover:text-redAccent transition-colors" fill="currentColor" viewBox="0 0 24 24"><path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clipRule="evenodd" /></svg>
               <span className="text-sm font-bold text-offWhite group-hover:text-redAccent transition-colors">GitHub</span>
@@ -100,7 +146,7 @@ export default function Home() {
         </div>
       </motion.section>
 
-      {/* EXPERIENCE - Reverted to Simple List */}
+      {/* EXPERIENCE */}
       <motion.section 
         id="experience"
         initial="hidden"
@@ -110,42 +156,71 @@ export default function Home() {
         className="border-none py-16"
       >
         <h3 className="text-xl font-bold tracking-widest uppercase mb-8 flex items-center gap-4">
-          <span className="w-8 h-[2px] bg-redAccent"></span> Places I've Worked
+          <span className="w-8 h-[2px] bg-redAccent"></span> Experience
         </h3>
         
         <div className="border-t border-b border-dashed border-offWhite/30 py-2">
-          {experiences.map((exp) => {
-            const hasLink = exp.link && exp.link !== '#' && exp.link !== '';
+          {groupedExperiences.map((group, index) => {
+            const hasLink = group.link && group.link !== '#' && group.link !== '';
 
-            const ExperienceContent = (
-              <div className="flex flex-col md:flex-row md:items-center justify-between py-5 border-b border-dashed border-offWhite/20 last:border-0 group hover:bg-offWhite/5 transition-colors px-4 -mx-4 rounded-lg w-full">
-                <div className="flex items-center gap-6 mb-2 md:mb-0">
-                  <div className="w-12 h-12 shrink-0 bg-white rounded flex items-center justify-center relative overflow-hidden">
-                    <Image src={exp.image} alt={exp.company} fill className="object-contain p-2" />
-                  </div>
-                  <div>
-                    <h4 className={`text-xl font-bold flex items-center gap-2 transition-colors ${hasLink ? 'group-hover:text-redAccent' : ''}`}>
-                      {exp.company}
-                      {hasLink && (
-                        <svg className="w-4 h-4 opacity-0 -translate-x-2 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-300 text-redAccent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
-                      )}
-                    </h4>
-                    <p className="text-offWhite/60 text-sm mt-1 font-normal">{exp.role}</p>
-                  </div>
+            const ExperienceContentInner = (
+              <div className="flex items-start gap-6 w-full">
+                <div className="w-12 h-12 shrink-0 bg-white rounded flex items-center justify-center relative overflow-hidden mt-1 md:mt-0">
+                  <Image src={group.image} alt={group.company} fill className="object-contain p-2" />
                 </div>
-                <div className="text-sm font-bold tracking-widest uppercase text-offWhite/50 md:text-right pl-18 md:pl-0">
-                  {exp.date}
+                <div className="flex-1 w-full">
+                  <h4 className={`text-xl font-bold flex items-center gap-2 transition-colors ${hasLink ? 'group-hover:text-redAccent' : ''}`}>
+                    {group.company}
+                    {hasLink && (
+                      <svg className="w-4 h-4 opacity-0 -translate-x-2 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-300 text-redAccent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+                    )}
+                  </h4>
+
+                  {/* Roles Branching Container */}
+                  <div className="mt-1 flex flex-col gap-4 relative">
+                    {/* Vertical line branch indicator for multiple roles */}
+                    {group.roles.length > 1 && (
+                      <div className="absolute left-[-42px] top-4 bottom-3 w-[2px] bg-offWhite/20 hidden md:block"></div>
+                    )}
+                    
+                    {group.roles.map((r: any) => (
+                      <div key={r.id} className="flex flex-col w-full relative group/role">
+                        {/* Horizontal line branch junction for multiple roles */}
+                        {group.roles.length > 1 && (
+                          <div className="absolute left-[-42px] top-[10px] w-4 h-[2px] bg-offWhite/20 hidden md:block"></div>
+                        )}
+                        
+                        <div className="flex flex-col md:flex-row md:items-center justify-between w-full">
+                          <p className="text-offWhite/60 text-sm font-normal">
+                            {r.role}
+                          </p>
+                          <div className="text-sm font-bold tracking-widest uppercase text-offWhite/50 md:text-right mt-1 md:mt-0 shrink-0">
+                            {r.date}
+                          </div>
+                        </div>
+
+                        {/* Description Line */}
+                        {r.description && (
+                          <p className="text-offWhite/50 text-[13px] italic mt-1.5 md:pr-12">
+                            {r.description}
+                          </p>
+                        )}
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
             );
 
+            const containerClasses = "flex flex-col md:flex-row md:items-start justify-between py-6 border-b border-dashed border-offWhite/20 last:border-0 group hover:bg-offWhite/5 transition-colors px-4 -mx-4 rounded-lg block";
+
             return hasLink ? (
-              <a key={exp.id} href={exp.link} target="_blank" rel="noreferrer" className="block">
-                {ExperienceContent}
+              <a key={index} href={group.link} target="_blank" rel="noreferrer" className={containerClasses}>
+                {ExperienceContentInner}
               </a>
             ) : (
-              <div key={exp.id} className="block">
-                {ExperienceContent}
+              <div key={index} className={containerClasses}>
+                {ExperienceContentInner}
               </div>
             );
           })}
@@ -165,7 +240,8 @@ export default function Home() {
           <span className="w-8 h-[2px] bg-redAccent"></span> Projects
         </h3>
         
-        <div className="border-t border-b border-solid border-offWhite/10 py-2">
+        {/* Changed border-solid to border-dashed to match experience section */}
+        <div className="border-t border-b border-dashed border-offWhite/30 py-2">
           {projects.map((project) => {
             const hasLink = project.link && project.link !== '#' && project.link !== '';
 
@@ -181,16 +257,21 @@ export default function Home() {
                     <p className="text-offWhite/70 text-sm leading-relaxed">{project.description}</p>
                  </div>
                  <div className="md:w-1/3 mt-4 md:mt-0 flex flex-wrap gap-2 md:justify-end content-start">
-                    {project.tags.map((tag) => (
-                      <span key={tag} className="text-[10px] font-bold tracking-widest border border-offWhite/20 px-2 py-1 rounded text-offWhite/60 bg-navy">
-                        {tag}
-                      </span>
-                    ))}
+                    {project.tags.map((tag) => {
+                      const iconUrl = getTagIcon(tag);
+                      return (
+                        <span key={tag} className="text-[10px] font-bold tracking-widest border border-offWhite/20 px-2 py-1 rounded text-offWhite/60 bg-navy flex items-center gap-1.5">
+                          {iconUrl && <img src={iconUrl} alt={tag} className="w-3 h-3" />}
+                          {tag}
+                        </span>
+                      );
+                    })}
                  </div>
                </>
             );
 
-            const containerClasses = "flex flex-col md:flex-row md:items-start justify-between py-6 border-b border-solid border-offWhite/10 last:border-0 hover:bg-offWhite/5 transition-colors px-4 -mx-4 rounded-lg block group";
+            // Changed border-solid to border-dashed to match experience section
+            const containerClasses = "flex flex-col md:flex-row md:items-start justify-between py-6 border-b border-dashed border-offWhite/20 last:border-0 hover:bg-offWhite/5 transition-colors px-4 -mx-4 rounded-lg block group";
 
             return hasLink ? (
               <a key={project.id} href={project.link} target="_blank" rel="noreferrer" className={containerClasses}>

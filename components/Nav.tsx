@@ -9,7 +9,7 @@ export default function Nav() {
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
-      className="flex justify-between items-center pb-8 border-b-2 border-offWhite/10 mb-12 pt-12"
+      className="sticky top-0 z-50 flex justify-between items-center pb-8 border-b-2 border-offWhite/10 mb-12 pt-12 backdrop-blur-md bg-navy/80"
     >
       <Link href="/">
         <h1 className="text-2xl font-black tracking-tighter hover:text-redAccent transition-colors cursor-pointer uppercase text-offWhite">
