@@ -7,6 +7,13 @@
 }
 
 @layer base {
+  /* Global fix for horizontal scrolling */
+  html,
+  body {
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
+
   body {
     /* Main background is now Navy */
     @apply bg-navy text-offWhite font-sans;
