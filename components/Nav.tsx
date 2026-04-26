@@ -2,15 +2,14 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, Transition } from 'framer-motion';
 
 export default function Nav() {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
-  // Snappy spring transition for the hamburger lines
-  const lineTransition = {
+  const lineTransition: Transition = {
     type: "spring",
     stiffness: 260,
     damping: 20,
@@ -21,7 +20,8 @@ export default function Nav() {
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
-      className="sticky top-0 z-50 flex flex-col pb-4 md:pb-8 border-b-2 border-offWhite/10 mb-12 pt-8 md:pt-12 backdrop-blur-md bg-navy/80 w-full"
+      /* Changed uneven padding to py-6 md:py-8 for perfect vertical centering */
+      className="sticky top-0 z-50 flex flex-col py-6 md:py-8 border-b-2 border-offWhite/10 mb-12 backdrop-blur-md bg-navy/80 w-full"
     >
       <div className="flex justify-between items-center w-full">
         <Link href="/">
@@ -55,7 +55,7 @@ export default function Nav() {
         {/* Mobile Hamburger Menu Toggle */}
         <button 
           onClick={toggleMenu}
-          className="md:hidden flex flex-col justify-center items-center w-8 h-8 z-50 text-offWhite"
+          className="md:hidden flex flex-col justify-center items-center w-8 h-8 z-50 text-offWhite -mr-2"
           aria-label="Toggle Navigation Menu"
         >
           <motion.span 
@@ -86,9 +86,6 @@ export default function Nav() {
             transition={{ duration: 0.3, ease: "easeInOut" }}
             className="md:hidden w-full overflow-hidden"
           >
-            {/* Inner wrapper for layout. 
-              Keeping padding/margin off the motion.div fixes the closing stutter. 
-            */}
             <div className="flex flex-col gap-4 text-sm font-bold tracking-widest uppercase text-offWhite items-center mt-6 pb-2">
               <Link 
                 href="/#experience" 
