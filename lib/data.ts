@@ -5,8 +5,8 @@ export const experiences = [
     role: 'Co-Reader / Grader',
     date: 'Aug 2025 - Dec 2025',
     image: '/images/berkeley-logo.jpg',
-    link: 'https://erg.berkeley.edu/',
-    description: 'Evaluated coursework and provided technical feedback for upper-division computer science classes.'
+    link: 'https://eecs.berkeley.edu/',
+    description: 'Evaluated upper-division coursework and helped students think more clearly about problem-solving and structure.'
   },
   {
     id: 'ucb',
@@ -14,9 +14,8 @@ export const experiences = [
     role: 'Head Graduate Student Instructor',
     date: 'May 2025 - Aug 2025',
     image: '/images/berkeley-logo.jpg',
-    link: 'https://erg.berkeley.edu/',
-    description: 'Managed a team of GSIs, organized course logistics, and led weekly discussion sections.'
-  },
+    link: 'https://eecs.berkeley.edu/',
+    description: 'Led weekly discussion sections, helping students work through complex material and stay on track with course logistics.'  },
   {
     id: 'sfsu',
     company: 'SFSU',
@@ -24,7 +23,10 @@ export const experiences = [
     date: 'May 2025 - Aug 2025',
     image: '/images/sfsu-logo.jpg',
     link: 'https://www.sfsu.edu/',
-    description: 'Conducted empirical studies on deep neural networks to optimize parameter efficiency.'
+    description: 'Trained a StructGNN model to predict building forces with 99.2% accuracy, working closely with civil engineering constraints where model output had to reflect real-world physics; not just data patterns.',
+    slides: [
+      { image: '/images/sfsu-speech.png', description: 'Research collaborator Matthew Pascual presenting our team\'s research at the Gilead Research Symposium at San Francisco State University.'},
+    ]      
   },
   {
     id: 'nasa',
@@ -33,12 +35,24 @@ export const experiences = [
     date: 'Jan 2025 - Jul 2025',
     image: '/images/nasa-logo.png',
     link: 'https://www.nasa.gov/',
-    description: 'Developed and optimized mission control software and simulated orbital trajectory modules.',
+    description: 'Prototyping an AI flight path for autonomous cargo drones at Langley meant working in a zero-margin-for-error environment, where simulated trajectories had to align with live wind tunnel data in real time.',
     slides: [
-      { image: '/images/nasa-speech.jpg', description: 'Collaborating with the engineering division to finalize orbital parameters.' },
-      { image: '/images/nasa-team.png', description: 'Collaborating with the engineering division to finalize orbital parameters.' },
-      { image: '/images/nasa-team1.png', description: 'Reviewing trajectory simulations before the main launch sequence.' },
-      { image: '/images/nasa-flight.mp4', description: 'Flight simulation' }
+      { 
+        image: '/images/nasa-speech.jpg', 
+        description: 'Presenting our team’s autonomous flight path prototypes to NASA engineers during final review.'
+      },
+      { 
+        image: '/images/nasa-team.png', 
+        description: 'Summer 2025 NCAS cohort at NASA Langley Research Center in Hampton, Virginia.' 
+      },
+      { 
+        image: '/images/nasa-team1.png', 
+        description: 'Touring NASA Langley’s ISAAC facilities.' 
+      },
+      { 
+        image: '/images/nasa-flight.mp4', 
+        description: 'Using NASA’s flight simulator to better understand flight behavior for our drone project.'
+      }
     ]
   },
   {
@@ -48,7 +62,7 @@ export const experiences = [
     date: 'Jun 2024 - Aug 2024',
     image: '/images/baywest-logo.png',
     link: 'http://www.baywestconstruction.com/',
-    description: 'Architected robust REST APIs in Node.js to manage real-time inventory and supply chain tracking.'
+    description: 'Architected Node.js REST APIs for real-time inventory tracking, building backend systems that had to immediately support and scale with active supply chain logistics.'
   },
   {
     id: 'sccr',
@@ -57,10 +71,16 @@ export const experiences = [
     date: 'Oct 2023 - Jan 2024',
     image: '/images/sccr-logo.jpg',
     link: 'https://med.stanford.edu/sccr.html',
-    description: 'Applied deep learning techniques using TensorFlow to segment and analyze medical imaging data.',
+    description: 'Developed a Mixture-of-Experts LLM for clinician training, navigating the constraints of domain-specific AI where model outputs had to strictly align with psychopathy-informed clinical standards.',
     slides: [
-      { image: '/images/sccr.jpg', description: 'Applying deep learning models to high-resolution medical scans.' },
-      { image: '/images/sccr1.jpg', description: 'Presenting the segmentation results to the clinical research board.' }
+      { 
+        image: '/images/sccr.jpg', 
+        description: 'Whiteboarding the architecture for the guardrail system and keyword extraction pipeline to safely constrain the LLM.' 
+      },
+      { 
+        image: '/images/sccr1.jpg', 
+        description: 'Mapping out the main LLM formatter, dynamically injecting prompt traits to generate distinct, consistent patient personas.' 
+      }
     ]
   },
   {
@@ -70,11 +90,20 @@ export const experiences = [
     date: 'Oct 2023 - Present',
     image: '/images/anre-logo.png',
     link: 'https://anreai.com',
-    description: 'Architected the core product infrastructure and managed enterprise AI integrations for B2B clients.',
-    slides: [
-      { image: '/images/anre-video.mp4', description: 'Scaling the core infrastructure with the founding t.' },
-      { image: '/images/anre-table.jpg', description: 'Scaling the core infrastructure with the founding team.' },
-      { image: '/images/anre-team.jpg', description: 'Scaling the core infrastructure with the founding team.' }
+description: 'Co-founded an AI consulting venture, building the core infrastructure and working across product and engineering to deliver systems for clients.',
+slides: [
+      { 
+        image: '/images/anre-table.jpg', 
+        description: 'Pitching our mission to hundreds of new undergraduates at a massive UC Berkeley organizational fair.' 
+      },
+      { 
+        image: '/images/anre-video.mp4', 
+        description: 'Generating and structuring conversational data pipelines to fine-tune our core LLM architecture.' 
+      },
+      { 
+        image: '/images/anre-team.jpg', 
+        description: 'Deep in engineering with the core team, strategizing alongside our research mentor Ryosuke Negi.' 
+      }
     ]
   },
   {
@@ -84,36 +113,54 @@ export const experiences = [
     date: 'Aug 2023 - May 2025',
     image: '/images/bcc-logo.png',
     link: 'https://www.berkeleycitycollege.edu/lrc',
-    description: 'Tutored students in foundational computer science concepts and programming paradigms.'
+    description: 'Tutored 400+ hours across CS, math and physics, focusing on breaking down complex paradigms to their absolute first principles; a skill that still drives my approach to systems engineering.'
   }
 ];
 
-export const projects = [
+export interface Project {
+  id: string;
+  title: string;
+  why: string;
+  what: string;
+  insight: string;
+  tags: string[];
+  link: string;
+}
+
+export const projects: Project[] = [
   {
     id: 'gymber',
     title: 'Gymber',
-    description: 'A fitness-focused iOS application designed to connect users with compatible workout partners using an intuitive swipe-based matching interface.',
+    why: "Built to solve a simple problem: staying consistent is easier when you're not training alone.",
+    what: 'Engineered an iOS application with an intuitive swipe-based matching interface, supported by a real-time Node.js and Firebase backend.',
+    insight: 'The challenge was architecting low-latency, highly compatible matchmaking with limited early user data.',
     tags: ['SWIFT', 'SWIFTUI', 'FIREBASE', 'NODE.JS'],
-    link: '#'
+    link: '#' // Add your project links here when ready
   },
   {
     id: 'transfer-ai',
     title: 'Transfer Pathway AI',
-    description: 'Full-stack application integrating LLMs to provide context-aware revisions for university admission essays and dynamically generated transfer schedules.',
+    why: 'The university transfer process is structurally opaque; I wanted to build a clear, data-driven bridge to top institutions.',
+    what: 'Developed a full-stack platform integrating LLMs for context-aware essay revisions, tapping the assist.org API to dynamically map schedules.',
+    insight: 'Focus: wrangling scattered public data APIs into a unified, actionable graph structure.',
     tags: ['REACT', 'PYTHON', 'FASTAPI', 'POSTGRES'],
     link: '#'
   },
   {
     id: 'cram',
     title: 'CRAM',
-    description: 'Computer Vision model incorporating eye-tracking and intelligent formula parsing to significantly increase reading speed and comprehension for complex research.',
+    why: 'Built around a question: can technical reading speed be radically improved without sacrificing deep comprehension?',
+    what: 'Implemented a computer vision model utilizing Rapid Serial Visual Presentation, eye-tracking, and intelligent formula parsing.',
+    insight: 'The constraint: processing dense, complex material while maintaining the low latency required for real-time tracking.',
     tags: ['OPENCV', 'REACT', 'FLASK', 'PYTHON'],
     link: '#'
   },
   {
     id: 'script-gen',
     title: 'Script & Engagement Gen',
-    description: 'Platform utilizing neural networks for video analysis and Facebook Ads API integration to automate enterprise performance insights and script generation.',
+    why: 'Marketing teams burn thousands of hours guessing what resonates; I wanted to mathematically solve engagement.',
+    what: 'Created an automated pipeline integrating TensorFlow and Facebook Ads APIs to analyze video performance and generate converting scripts.',
+    insight: 'The focus was embedding heavy neural network inference natively into a highly scalable C++ backend.',
     tags: ['PYTHON', 'C++', 'TENSORFLOW', 'DOCKER'],
     link: '#'
   }

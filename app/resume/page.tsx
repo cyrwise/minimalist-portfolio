@@ -20,7 +20,7 @@ export default function ResumePage() {
       initial="hidden"
       animate="visible"
       variants={fadeUp}
-      className="pb-24 text-fg h-[90vh] flex flex-col transition-none px-4 md:px-0"
+      className="pt-8 pb-12 text-fg h-[calc(100vh-120px)] flex flex-col transition-none px-4 md:px-0"
     >
       <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 border-b-2 border-border pb-6 shrink-0 relative gap-4">
         <div>
@@ -34,12 +34,10 @@ export default function ResumePage() {
           </p>
         </div>
 
-        {/* Visible on all screens, square-ish radius, and 2px border for visibility */}
         <motion.a
           href="/resume.pdf"
           download
-          className="flex items-center gap-3 border-2 border-border px-8 py-3 text-sm font-medium tracking-wide uppercase transition-all rounded-lg 
-                     bg-transparent text-fg hover:border-accent hover:bg-accent hover:text-white group transition-none w-full md:w-auto justify-center"
+          className="flex items-center gap-3 border-2 border-border px-8 py-3 text-sm font-medium tracking-wide uppercase transition-all rounded-lg bg-transparent text-fg hover:border-accent hover:bg-accent hover:text-white group transition-none w-full md:w-auto justify-center"
         >
           <span>Download PDF</span>
           <motion.svg 

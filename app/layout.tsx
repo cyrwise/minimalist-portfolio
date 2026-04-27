@@ -9,9 +9,11 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Cyrus Wise | Software Engineer & Founder",
   description: "Portfolio, projects, and work.",
-  icons: {
-    icon: "/images/face.png",
-  },
+icons: {
+  icon: "/favicon.png?v=2",
+  shortcut: "/favicon.png?v=2",
+  apple: "/favicon.png?v=2",
+},
 };
 
 export default function RootLayout({
