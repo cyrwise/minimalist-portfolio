@@ -33,7 +33,13 @@ export const experiences = [
     date: 'Jan 2025 - Jul 2025',
     image: '/images/nasa-logo.png',
     link: 'https://www.nasa.gov/',
-    description: 'Developed and optimized mission control software and simulated orbital trajectory modules.'
+    description: 'Developed and optimized mission control software and simulated orbital trajectory modules.',
+    slides: [
+      { image: '/images/nasa-speech.jpg', description: 'Collaborating with the engineering division to finalize orbital parameters.' },
+      { image: '/images/nasa-team.png', description: 'Collaborating with the engineering division to finalize orbital parameters.' },
+      { image: '/images/nasa-team1.png', description: 'Reviewing trajectory simulations before the main launch sequence.' },
+      { image: '/images/nasa-flight.mp4', description: 'Flight simulation' }
+    ]
   },
   {
     id: 'baywest',
@@ -51,7 +57,11 @@ export const experiences = [
     date: 'Oct 2023 - Jan 2024',
     image: '/images/sccr-logo.jpg',
     link: 'https://med.stanford.edu/sccr.html',
-    description: 'Applied deep learning techniques using TensorFlow to segment and analyze medical imaging data.'
+    description: 'Applied deep learning techniques using TensorFlow to segment and analyze medical imaging data.',
+    slides: [
+      { image: '/images/sccr.jpg', description: 'Applying deep learning models to high-resolution medical scans.' },
+      { image: '/images/sccr1.jpg', description: 'Presenting the segmentation results to the clinical research board.' }
+    ]
   },
   {
     id: 'anre',
@@ -60,7 +70,12 @@ export const experiences = [
     date: 'Oct 2023 - Present',
     image: '/images/anre-logo.png',
     link: 'https://anreai.com',
-    description: 'Architected the core product infrastructure and managed enterprise AI integrations for B2B clients.'
+    description: 'Architected the core product infrastructure and managed enterprise AI integrations for B2B clients.',
+    slides: [
+      { image: '/images/anre-video.mp4', description: 'Scaling the core infrastructure with the founding t.' },
+      { image: '/images/anre-table.jpg', description: 'Scaling the core infrastructure with the founding team.' },
+      { image: '/images/anre-team.jpg', description: 'Scaling the core infrastructure with the founding team.' }
+    ]
   },
   {
     id: 'bcc',
@@ -79,7 +94,7 @@ export const projects = [
     title: 'Gymber',
     description: 'A fitness-focused iOS application designed to connect users with compatible workout partners using an intuitive swipe-based matching interface.',
     tags: ['SWIFT', 'SWIFTUI', 'FIREBASE', 'NODE.JS'],
-    link: '#' // Add your project links here when ready
+    link: '#'
   },
   {
     id: 'transfer-ai',

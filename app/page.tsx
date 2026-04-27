@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { motion, Variants } from "framer-motion";
 import Image from "next/image";
 import { experiences, projects } from "@/lib/data";
@@ -35,6 +36,86 @@ const getTagIcon = (tag: string) => {
   return icons[tag] || null;
 };
 
+// Extracted Slideshow Component with Video Support
+const ExperienceSlideshow = ({ slides }: { slides: any[] }) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  if (!slides || slides.length === 0) return null;
+
+  const nextSlide = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setCurrentIndex((prev) => (prev + 1) % slides.length);
+  };
+
+  const prevSlide = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setCurrentIndex((prev) => (prev - 1 + slides.length) % slides.length);
+  };
+
+  const currentSlide = slides[currentIndex];
+  const isVideo = currentSlide.image?.endsWith('.mp4') || currentSlide.image?.endsWith('.webm');
+
+  return (
+    <div 
+      className="mt-6 md:mt-8 ml-0 md:ml-16 border-t-[1px] border-border pt-6 cursor-default"
+      onClick={(e) => {
+        // Prevent click from propagating to the parent <a> link wrapper
+        e.preventDefault();
+        e.stopPropagation();
+      }}
+    >
+      <div className="flex flex-col md:flex-row gap-6 items-center">
+        <div className="w-full md:w-1/2 relative aspect-video bg-fg/[0.02] border-[1px] border-border rounded-sm overflow-hidden shrink-0">
+          {isVideo ? (
+            <video 
+              src={currentSlide.image} 
+              autoPlay 
+              loop 
+              muted 
+              playsInline 
+              className="w-full h-full object-cover absolute inset-0"
+            />
+          ) : (
+            <Image 
+              src={currentSlide.image} 
+              alt="Experience Insight" 
+              fill 
+              className="object-cover" 
+            />
+          )}
+        </div>
+        <div className="w-full md:w-1/2 flex flex-col justify-center py-2">
+          <p className="text-sm text-muted/80 leading-relaxed mb-6 font-sans">
+            {currentSlide.description}
+          </p>
+          
+          {slides.length > 1 && (
+            <div className="flex items-center gap-4 select-none">
+              <button 
+                onClick={prevSlide} 
+                className="w-8 h-8 flex items-center justify-center border-[1px] border-border hover:border-accent hover:text-accent transition-colors rounded-sm text-muted"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
+              </button>
+              <span className="text-[10px] font-mono text-muted tracking-widest">
+                {currentIndex + 1} / {slides.length}
+              </span>
+              <button 
+                onClick={nextSlide} 
+                className="w-8 h-8 flex items-center justify-center border-[1px] border-border hover:border-accent hover:text-accent transition-colors rounded-sm text-muted"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+              </button>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
 export default function Home() {
   const groupedExperiences = experiences.reduce((acc: any[], current: any) => {
     const last = acc[acc.length - 1];
@@ -50,6 +131,7 @@ export default function Home() {
         company: current.company,
         image: current.image,
         link: current.link,
+        slides: current.slides, 
         roles: [{ 
           id: current.id, 
           role: current.role, 
@@ -63,6 +145,7 @@ export default function Home() {
 
   return (
     <main className="pb-12 text-fg font-sans w-full transition-colors duration-300">
+      {/* Hero Section */}
       <motion.section 
         initial="hidden"
         animate="visible"
@@ -79,28 +162,27 @@ export default function Home() {
             Crafting systems <br /> & scaling ideas.
           </h2>
           <p className="text-lg md:text-xl max-w-2xl text-muted font-normal leading-relaxed mb-10 mx-auto md:mx-0">
-            I am a software engineer, machine learning researcher, and startup founder. I focus on the art of AI infrastructure and modern web development—bridging the gap between rigorous technical execution and visionary strategy.
+            I am a software engineer, machine learning researcher, and startup founder. I focus on the art of AI infrastructure and modern web development—bridging the gap between technical execution and visionary strategy.
           </p>
 
           <div className="flex flex-col md:flex-row items-center justify-center md:justify-start gap-8 mb-8">
-            <div className="flex items-center gap-2 text-sm font-medium tracking-wide text-muted">
+            <div className="flex items-center gap-2 text-sm font-medium tracking-wide text-muted font-mono">
               <svg className="w-4 h-4 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
-              San Francisco, CA
+              SAN FRANCISCO, CA
             </div>
-            <a href="mailto:cyr@berkeley.edu" className="text-sm font-medium tracking-wide text-muted hover:text-accent transition-colors">
+            <a href="mailto:cyr@berkeley.edu" className="text-sm font-medium tracking-wide text-muted hover:text-accent transition-colors font-mono uppercase">
               cyr@berkeley.edu
             </a>
           </div>
 
           <div className="flex flex-wrap justify-center md:justify-start gap-4">
-            <a href="https://linkedin.com/in/cyruswise" target="_blank" rel="noreferrer" className="flex items-center gap-2 bg-transparent border-2 border-border hover:border-accent px-5 py-2.5 rounded-lg transition-all group">
-              <svg className="w-4 h-4 text-fg group-hover:text-accent transition-colors" fill="currentColor" viewBox="0 0 24 24"><path fillRule="evenodd" d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" clipRule="evenodd" /></svg>
-              <span className="text-sm font-medium text-fg group-hover:text-accent transition-colors">LinkedIn</span>
-              <span className="bg-[#0077b5] text-white text-[10px] px-2 py-0.5 rounded-sm font-medium ml-1 tracking-wide">19K+</span>
+            <a href="https://linkedin.com/in/cyruswise" target="_blank" rel="noreferrer" className="flex items-center gap-3 bg-transparent border-[1px] border-border hover:border-accent px-5 py-2.5 rounded-sm transition-all group">
+              <span className="text-xs font-medium text-fg uppercase tracking-widest font-mono group-hover:text-accent">LinkedIn</span>
+              <svg className="w-4 h-4 text-fg group-hover:text-accent transition-colors" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" /></svg>
             </a>
-            <a href="https://github.com/cyrwise" target="_blank" rel="noreferrer" className="flex items-center gap-2 bg-transparent border-2 border-border hover:border-accent px-5 py-2.5 rounded-lg transition-all group">
-              <svg className="w-4 h-4 text-fg group-hover:text-accent transition-colors" fill="currentColor" viewBox="0 0 24 24"><path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clipRule="evenodd" /></svg>
-              <span className="text-sm font-medium text-fg group-hover:text-accent transition-colors">GitHub</span>
+            <a href="https://github.com/cyrwise" target="_blank" rel="noreferrer" className="flex items-center gap-3 bg-transparent border-[1px] border-border hover:border-accent px-5 py-2.5 rounded-sm transition-all group">
+              <span className="text-xs font-medium text-fg uppercase tracking-widest font-mono group-hover:text-accent">GitHub</span>
+              <svg className="w-4 h-4 text-fg group-hover:text-accent transition-colors" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" /></svg>
             </a>
           </div>
         </div>
@@ -119,35 +201,74 @@ export default function Home() {
         </div>
       </motion.section>
 
+      {/* Education Section - Blueprint Roadmap Aesthetic */}
       <motion.section 
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
         variants={fadeUp}
-        className="border-none pb-16 pt-8 px-4 md:px-0"
+        className="border-t-[1px] border-border pb-24 pt-12 px-4 md:px-0"
       >
-        <div className="flex items-center gap-4 mb-8 relative">
-          <div className="absolute left-[-1rem] md:left-[-1.5rem] w-[2px] h-[80%] bg-accent"></div>
-          <h3 className="text-2xl font-serif font-medium text-fg">Education</h3>
-          <div className="w-8 h-[1px] bg-accent opacity-60"></div>
+        <div className="mb-16">
+          <span className="text-[10px] font-mono tracking-[0.3em] uppercase text-accent mb-2 block text-center md:text-left">The Journey</span>
+          <h3 className="text-3xl font-serif font-medium text-fg text-center md:text-left">Academic Narrative</h3>
         </div>
-        
-        <div className="flex flex-col md:flex-row items-start md:items-center gap-6 group p-8 border-2 border-border bg-transparent rounded-xl hover:border-fg/20 transition-colors">
-          <div className="w-16 h-16 shrink-0 relative overflow-hidden group-hover:scale-105 transition-transform duration-500">
-            <img 
-              src="https://upload.wikimedia.org/wikipedia/commons/a/a1/Seal_of_University_of_California%2C_Berkeley.svg" 
-              alt="UC Berkeley Seal" 
-              className="w-full h-full object-contain grayscale opacity-80 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-500"
-            />
+
+        <div className="flex flex-col md:flex-row items-center justify-between gap-8 md:gap-4 relative">
+          
+          {/* Stage 1: BCC */}
+          <div className="flex flex-col items-center md:items-start text-center md:text-left md:w-1/4">
+            <div className="w-12 h-12 rounded-full border-[1px] border-border flex items-center justify-center mb-6 bg-fg/[0.02] text-[10px] font-mono">CC</div>
+            <h4 className="text-sm font-serif font-medium mb-2">Berkeley City College</h4>
+            <p className="text-[11px] text-muted leading-relaxed uppercase font-mono tracking-tighter">STEM Baseline & Foundational Logic</p>
+            <p className="mt-3 text-[12px] text-muted/60 leading-relaxed hidden md:block">Establishing the mathematical and logical rigor required for high-level computation.</p>
           </div>
-          <div>
-            <h4 className="text-xl md:text-2xl font-medium font-serif text-fg">University of California, Berkeley</h4>
-            <p className="text-muted font-normal mt-2 text-sm md:text-base">B.S. Electrical Engineering & Computer Sciences, Minor in Data Science</p>
-            <p className="text-sm font-medium text-muted/70 mt-2">Expected 2026</p>
+
+          {/* Arrow 1 */}
+          <div className="hidden md:block flex-1 h-[1px] bg-border relative">
+            <div className="absolute right-0 -top-[3px] w-1.5 h-1.5 border-t-[1px] border-r-[1px] border-border rotate-45"></div>
           </div>
+          <div className="md:hidden w-[1px] h-12 bg-border relative">
+             <div className="absolute bottom-0 -left-[3px] w-1.5 h-1.5 border-b-[1px] border-r-[1px] border-border rotate-45"></div>
+          </div>
+
+          {/* Stage 2: Berkeley (The Focal Point) */}
+          <div className="flex flex-col items-center text-center md:w-1/3 bg-fg/[0.02] border-[1px] border-border p-8 rounded-sm relative group">
+            <div className="w-20 h-20 relative mb-6">
+               <img 
+                src="https://upload.wikimedia.org/wikipedia/commons/a/a1/Seal_of_University_of_California%2C_Berkeley.svg" 
+                alt="UC Berkeley" 
+                className="w-full h-full object-contain grayscale-0 group-hover:grayscale transition-all duration-700"
+              />
+            </div>
+            <h4 className="text-lg font-serif font-medium mb-1">UC Berkeley</h4>
+            <p className="text-[10px] font-mono text-accent uppercase tracking-widest mb-4">EECS & AI Research</p>
+            <p className="text-xs text-muted/80 leading-relaxed max-w-[220px]">
+              Specializing in AI infrastructure. Solving technical debt through rigorous research and architectural deep-dives.
+            </p>
+            <div className="absolute -top-2 -right-2 px-2 py-1 bg-bg border-[1px] border-border text-[9px] font-mono text-muted uppercase">Currently Here</div>
+          </div>
+
+          {/* Arrow 2 */}
+          <div className="hidden md:block flex-1 h-[1px] bg-border relative">
+            <div className="absolute right-0 -top-[3px] w-1.5 h-1.5 border-t-[1px] border-r-[1px] border-border rotate-45"></div>
+          </div>
+          <div className="md:hidden w-[1px] h-12 bg-border relative">
+             <div className="absolute bottom-0 -left-[3px] w-1.5 h-1.5 border-b-[1px] border-r-[1px] border-border rotate-45"></div>
+          </div>
+
+          {/* Stage 3: Future */}
+          <div className="flex flex-col items-center md:items-end text-center md:text-right md:w-1/4">
+            <div className="w-12 h-12 rounded-full border-[1px] border-dashed border-accent flex items-center justify-center mb-6 text-[10px] font-mono text-accent">MBA</div>
+            <h4 className="text-sm font-serif font-medium mb-2">MBA Aspiration</h4>
+            <p className="text-[11px] text-muted leading-relaxed uppercase font-mono tracking-tighter">Organizational Scaling & Visionary Leadership</p>
+            <p className="mt-3 text-[12px] text-muted/60 leading-relaxed hidden md:block">Bridging the technical gap to drive high-stakes business outcomes and scale global ventures.</p>
+          </div>
+
         </div>
       </motion.section>
 
+      {/* Experience Section */}
       <motion.section 
         id="experience"
         initial="hidden"
@@ -158,74 +279,70 @@ export default function Home() {
       >
         <div className="flex items-center gap-4 mb-8 relative">
           <div className="absolute left-[-1rem] md:left-[-1.5rem] w-[2px] h-[80%] bg-accent"></div>
-          <h3 className="text-2xl font-serif font-medium text-fg">Experience</h3>
-          <div className="w-8 h-[1px] bg-accent opacity-60"></div>
+          <h3 className="text-sm font-mono font-medium text-muted uppercase tracking-[0.3em]">Work History</h3>
         </div>
         
-        <div className="border-t-2 border-border py-2">
+        <div className="border-t-[1px] border-border">
           {groupedExperiences.map((group, index) => {
             const hasLink = group.link && group.link !== '#' && group.link !== '';
 
-            const ExperienceContentInner = (
-              <div className="flex items-start gap-6 w-full">
-                <div className="w-12 h-12 shrink-0 bg-white rounded flex items-center justify-center relative overflow-hidden mt-1 md:mt-0 p-2 opacity-90 group-hover:opacity-100 transition-opacity">
-                  <Image src={group.image} alt={group.company} fill className="object-contain p-2" />
-                </div>
-                <div className="flex-1 w-full">
-                  <h4 className={`text-xl font-medium font-serif flex items-center gap-2 transition-colors text-fg ${hasLink ? 'group-hover:text-accent' : ''}`}>
-                    {group.company}
-                    {hasLink && (
-                      <svg className="w-4 h-4 opacity-0 -translate-x-2 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-300 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
-                    )}
-                  </h4>
-
-                  <div className="mt-2 flex flex-col gap-5 relative">
-                    {group.roles.length > 1 && (
-                      <div className="absolute left-[-42px] top-4 bottom-3 w-[1px] bg-border hidden md:block"></div>
-                    )}
-                    
-                    {group.roles.map((r: any) => (
-                      <div key={r.id} className="flex flex-col w-full relative group/role">
-                        {group.roles.length > 1 && (
-                          <div className="absolute left-[-42px] top-[10px] w-4 h-[1px] bg-border hidden md:block"></div>
-                        )}
-                        
-                        <div className="flex flex-col md:flex-row md:items-center justify-between w-full">
-                          <p className="text-muted text-sm font-normal">
-                            {r.role}
-                          </p>
-                          <div className="text-sm font-medium text-muted/70 md:text-right mt-1 md:mt-0 shrink-0">
-                            {r.date}
+            const Content = (
+              <div className="w-full">
+                <div className="flex items-start gap-8 w-full">
+                  <div className="w-10 h-10 shrink-0 grayscale-0 group-hover:grayscale group-hover:opacity-50 transition-all opacity-100 mt-1">
+                    <Image src={group.image} alt={group.company} width={40} height={40} className="object-contain" />
+                  </div>
+                  <div className="flex-1">
+                    <div className="flex items-center gap-2 mb-4">
+                      <h4 className={`text-xl font-serif text-fg transition-colors duration-300 ${hasLink ? 'group-hover:text-accent' : ''}`}>
+                        {group.company}
+                      </h4>
+                      {hasLink && (
+                        <svg className="w-3.5 h-3.5 text-accent opacity-0 group-hover:opacity-100 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+                      )}
+                    </div>
+                    <div className="space-y-6">
+                      {group.roles.map((r: any) => (
+                        <div key={r.id} className="relative">
+                          <div className="flex flex-col md:flex-row md:items-center justify-between w-full mb-1">
+                            <p className="text-[11px] font-mono uppercase tracking-widest text-accent transition-none">
+                              {r.role}
+                            </p>
+                            <span className="text-[10px] font-mono text-muted/60 uppercase transition-colors duration-300 group-hover:text-muted">
+                              {r.date}
+                            </span>
                           </div>
-                        </div>
-
-                        {r.description && (
-                          <p className="text-muted/80 text-[13.5px] leading-relaxed mt-2 md:pr-12">
+                          <p className="text-sm text-muted/80 leading-relaxed max-w-3xl transition-colors duration-300 group-hover:text-muted">
                             {r.description}
                           </p>
-                        )}
-                      </div>
-                    ))}
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </div>
+
+                {/* Component specifically checking for our new slides array */}
+                {group.slides && <ExperienceSlideshow slides={group.slides} />}
+
               </div>
             );
 
-            const containerClasses = "flex flex-col md:flex-row md:items-start justify-between py-8 border-b-2 border-border last:border-0 group hover:bg-fg/[0.02] transition-colors px-4 -mx-4 rounded-lg block";
+            const containerClasses = "flex flex-col md:flex-row md:items-start justify-between py-10 border-b-[1px] border-border last:border-0 group hover:bg-fg/[0.015] dark:hover:bg-fg/[0.03] transition-colors duration-300 transform-gpu antialiased px-4 -mx-4 rounded-sm block text-left";
 
             return hasLink ? (
               <a key={index} href={group.link} target="_blank" rel="noreferrer" className={containerClasses}>
-                {ExperienceContentInner}
+                {Content}
               </a>
             ) : (
               <div key={index} className={containerClasses}>
-                {ExperienceContentInner}
+                {Content}
               </div>
             );
           })}
         </div>
       </motion.section>
 
+      {/* Projects Section */}
       <motion.section 
         id="projects"
         initial="hidden"
@@ -234,66 +351,46 @@ export default function Home() {
         variants={fadeUp}
         className="border-none py-16 px-4 md:px-0"
       >
-        <div className="flex items-center gap-4 mb-8 relative">
+        <div className="flex items-center gap-4 mb-12 relative">
           <div className="absolute left-[-1rem] md:left-[-1.5rem] w-[2px] h-[80%] bg-accent"></div>
-          <h3 className="text-2xl font-serif font-medium text-fg">Projects</h3>
-          <div className="w-8 h-[1px] bg-accent opacity-60"></div>
+          <h3 className="text-sm font-mono font-medium text-muted uppercase tracking-[0.3em]">Code & Research</h3>
         </div>
         
-        <div className="border-t-2 border-border py-2">
-          {projects.map((project) => {
-            const hasLink = project.link && project.link !== '#' && project.link !== '';
-
-            const Content = (
-               <>
-                 <div className="md:w-2/3 pr-4">
-                    <h4 className={`text-xl font-medium font-serif mb-3 flex items-center gap-2 transition-colors text-fg ${hasLink ? 'group-hover:text-accent' : ''}`}>
-                      {project.title}
-                      {hasLink && (
-                        <svg className="w-4 h-4 opacity-0 -translate-x-2 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-300 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
-                      )}
-                    </h4>
-                    <p className="text-muted/90 text-sm leading-relaxed">{project.description}</p>
-                 </div>
-                 <div className="md:w-1/3 mt-4 md:mt-0 flex flex-wrap gap-2 md:justify-end content-start opacity-80 group-hover:opacity-100 transition-opacity">
-                    {project.tags.map((tag) => {
-                      const iconUrl = getTagIcon(tag);
-                      return (
-                        <span key={tag} className="text-[11px] font-medium tracking-wide border-2 border-border px-2.5 py-1 rounded-md text-muted bg-transparent flex items-center gap-1.5">
-                          {iconUrl && <img src={iconUrl} alt={tag} className="w-3 h-3 grayscale" />}
-                          {tag}
-                        </span>
-                      );
-                    })}
-                 </div>
-               </>
-            );
-
-            const containerClasses = "flex flex-col md:flex-row md:items-start justify-between py-8 border-b-2 border-border last:border-0 hover:bg-fg/[0.02] transition-colors px-4 -mx-4 rounded-lg block group";
-
-            return hasLink ? (
-              <a key={project.id} href={project.link} target="_blank" rel="noreferrer" className={containerClasses}>
-                {Content}
-              </a>
-            ) : (
-              <div key={project.id} className={containerClasses}>
-                {Content}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-border border-[1px] border-border">
+          {projects.map((project) => (
+            <div key={project.id} className="group bg-bg p-8 hover:bg-fg/[0.015] dark:hover:bg-fg/[0.03] transition-all flex flex-col justify-between min-h-[300px]">
+              <div>
+                <h4 className="text-2xl font-serif mb-4 group-hover:text-accent transition-colors">{project.title}</h4>
+                <p className="text-sm text-muted/90 leading-relaxed mb-6">{project.description}</p>
               </div>
-            );
-          })}
+              <div className="flex flex-wrap gap-2">
+                {project.tags.map((tag) => {
+                  const iconUrl = getTagIcon(tag);
+                  return (
+                    <span key={tag} className="text-[9px] font-mono uppercase tracking-widest border-[1px] border-border px-2 py-1 text-muted flex items-center gap-1.5 group-hover:bg-fg/[0.05] transition-colors">
+                      {iconUrl && <img src={iconUrl} alt={tag} className="w-3 h-3 grayscale-0 group-hover:grayscale group-hover:opacity-50 transition-all" />}
+                      {tag}
+                    </span>
+                  );
+                })}
+              </div>
+            </div>
+          ))}
         </div>
       </motion.section>
 
+      {/* Footer */}
       <motion.section 
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
         variants={fadeUp}
-        className="border-none py-32 text-center"
+        className="py-32 flex flex-col items-center border-t-[1px] border-border mt-16"
       >
-        <h2 className="text-4xl md:text-5xl font-serif font-medium mb-8 text-fg">Let's build.</h2>
-        <a href="mailto:cyr@berkeley.edu" className="inline-block bg-fg text-bg text-sm font-medium tracking-wide px-8 py-4 rounded-lg hover:bg-accent hover:text-fg transition-colors">
-          Get in touch
+        <span className="text-[10px] font-mono tracking-[0.4em] uppercase text-accent mb-6">Built in Berkeley</span>
+        <h2 className="text-5xl md:text-7xl font-serif font-medium mb-12 text-fg text-center">Ready to scale.</h2>
+        <a href="mailto:cyr@berkeley.edu" className="font-mono text-xs uppercase tracking-[0.2em] border-b-[1px] border-fg pb-2 hover:text-accent hover:border-accent transition-all">
+          Initiate Contact
         </a>
       </motion.section>
     </main>
