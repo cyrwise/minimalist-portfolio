@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { ThemeProvider } from "next-themes";
 import "./globals.css";
 import Nav from "@/components/Nav";
 
@@ -19,12 +20,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       <body className={`${inter.className} antialiased`}>
-        <div className="max-w-4xl mx-auto px-6 md:px-12">
-          <Nav />
-          {children}
-        </div>
+        <ThemeProvider attribute="class" defaultTheme="light">
+          <div className="max-w-4xl mx-auto px-6 md:px-12">
+            <Nav />
+            {children}
+          </div>
+        </ThemeProvider>
       </body>
     </html>
   );

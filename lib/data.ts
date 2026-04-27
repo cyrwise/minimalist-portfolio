@@ -1,6 +1,6 @@
 export const experiences = [
   {
-    id: 'ucb',
+    id: 'ucb1',
     company: 'University of California, Berkeley',
     role: 'Co-Reader / Grader',
     date: 'Aug 2025 - Dec 2025',

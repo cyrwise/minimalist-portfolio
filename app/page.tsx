@@ -16,7 +16,6 @@ const fadeUp: Variants = {
   },
 };
 
-// Helper function to fetch icons for technology tags
 const getTagIcon = (tag: string) => {
   const icons: Record<string, string> = {
     'SWIFT': 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/swift/swift-original.svg',
@@ -37,7 +36,6 @@ const getTagIcon = (tag: string) => {
 };
 
 export default function Home() {
-  // Group consecutive experiences from the same company
   const groupedExperiences = experiences.reduce((acc: any[], current: any) => {
     const last = acc[acc.length - 1];
     if (last && last.company === current.company) {
@@ -64,151 +62,145 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="pb-12 text-offWhite font-sans">
-      
-      {/* HERO SECTION */}
+    <main className="pb-12 text-fg font-sans w-full transition-colors duration-300">
       <motion.section 
         initial="hidden"
         animate="visible"
         variants={fadeUp}
-        className="pt-12 pb-24 flex flex-col-reverse md:flex-row gap-12 items-center justify-between border-none"
+        className="pt-16 pb-24 flex flex-col-reverse md:flex-row gap-12 items-center justify-between border-none px-4 md:px-0"
       >
-        <div className="md:w-2/3 text-center md:text-left">
-          <p className="text-redAccent font-bold tracking-widest uppercase text-sm mb-4">■ Available for work</p>
-          <h2 className="text-5xl md:text-6xl font-extrabold leading-tight tracking-tight mb-6">
-            BUILDING SYSTEMS <br /> & SCALING IDEAS.
+        <div className="md:w-3/5 text-center md:text-left z-10 relative">
+          <div className="absolute left-[-1rem] md:left-[-1.5rem] top-0 bottom-[40%] w-[2px] bg-accent"></div>
+
+          <p className="text-fg font-medium tracking-wide text-sm mb-6 flex items-center justify-center md:justify-start gap-2">
+            <span className="w-2 h-2 bg-accent rounded-full"></span> Hello, I'm Cyrus
+          </p>
+          <h2 className="text-4xl md:text-6xl font-medium leading-tight mb-8 text-fg font-serif">
+            Crafting systems <br /> & scaling ideas.
           </h2>
-          <p className="text-lg md:text-xl max-w-2xl text-offWhite/80 font-medium mb-10 mx-auto md:mx-0">
-            I am a software engineer, machine learning researcher, and startup founder focusing on AI infrastructure and modern web development. 
-            Bridging the gap between technical execution and high-level strategy.
+          <p className="text-lg md:text-xl max-w-2xl text-muted font-normal leading-relaxed mb-10 mx-auto md:mx-0">
+            I am a software engineer, machine learning researcher, and startup founder. I focus on the art of AI infrastructure and modern web development—bridging the gap between rigorous technical execution and visionary strategy.
           </p>
 
-          {/* HORIZONTAL CONTACT STRIP */}
-          <div className="flex flex-col md:flex-row items-center justify-center md:justify-start gap-6 mb-6">
-            <div className="flex items-center gap-2 text-sm font-bold tracking-widest uppercase text-offWhite/60">
-              <svg className="w-4 h-4 text-redAccent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+          <div className="flex flex-col md:flex-row items-center justify-center md:justify-start gap-8 mb-8">
+            <div className="flex items-center gap-2 text-sm font-medium tracking-wide text-muted">
+              <svg className="w-4 h-4 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
               San Francisco, CA
             </div>
-            <a href="mailto:cyr@berkeley.edu" className="text-sm font-bold tracking-widest uppercase text-offWhite/60 hover:text-redAccent transition-colors">
+            <a href="mailto:cyr@berkeley.edu" className="text-sm font-medium tracking-wide text-muted hover:text-accent transition-colors">
               cyr@berkeley.edu
             </a>
           </div>
 
-          {/* HIGH VISIBILITY SOCIALS */}
           <div className="flex flex-wrap justify-center md:justify-start gap-4">
-            <a href="https://linkedin.com/in/cyruswise" target="_blank" rel="noreferrer" className="flex items-center gap-2 bg-offWhite/5 border border-offWhite/10 hover:border-redAccent px-4 py-2 rounded-full transition-all group">
-              <svg className="w-4 h-4 text-offWhite group-hover:text-redAccent transition-colors" fill="currentColor" viewBox="0 0 24 24"><path fillRule="evenodd" d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" clipRule="evenodd" /></svg>
-              <span className="text-sm font-bold text-offWhite group-hover:text-redAccent transition-colors">LinkedIn</span>
-              <span className="bg-[#0077b5] text-white text-[10px] px-2 py-0.5 rounded-full font-bold ml-1 shadow-lg tracking-wider">19K+</span>
+            <a href="https://linkedin.com/in/cyruswise" target="_blank" rel="noreferrer" className="flex items-center gap-2 bg-transparent border-2 border-border hover:border-accent px-5 py-2.5 rounded-lg transition-all group">
+              <svg className="w-4 h-4 text-fg group-hover:text-accent transition-colors" fill="currentColor" viewBox="0 0 24 24"><path fillRule="evenodd" d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" clipRule="evenodd" /></svg>
+              <span className="text-sm font-medium text-fg group-hover:text-accent transition-colors">LinkedIn</span>
+              <span className="bg-[#0077b5] text-white text-[10px] px-2 py-0.5 rounded-sm font-medium ml-1 tracking-wide">19K+</span>
             </a>
-            {/* <a href="https://twitter.com/cyrwise" target="_blank" rel="noreferrer" className="flex items-center gap-2 bg-offWhite/5 border border-offWhite/10 hover:border-redAccent px-4 py-2 rounded-full transition-all group">
-              <svg className="w-4 h-4 text-offWhite group-hover:text-redAccent transition-colors" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.008 5.936H5.08z" /></svg>
-              <span className="text-sm font-bold text-offWhite group-hover:text-redAccent transition-colors">Twitter</span>
-            </a> */}
-            <a href="https://github.com/cyrwise" target="_blank" rel="noreferrer" className="flex items-center gap-2 bg-offWhite/5 border border-offWhite/10 hover:border-redAccent px-4 py-2 rounded-full transition-all group">
-              <svg className="w-4 h-4 text-offWhite group-hover:text-redAccent transition-colors" fill="currentColor" viewBox="0 0 24 24"><path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clipRule="evenodd" /></svg>
-              <span className="text-sm font-bold text-offWhite group-hover:text-redAccent transition-colors">GitHub</span>
+            <a href="https://github.com/cyrwise" target="_blank" rel="noreferrer" className="flex items-center gap-2 bg-transparent border-2 border-border hover:border-accent px-5 py-2.5 rounded-lg transition-all group">
+              <svg className="w-4 h-4 text-fg group-hover:text-accent transition-colors" fill="currentColor" viewBox="0 0 24 24"><path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clipRule="evenodd" /></svg>
+              <span className="text-sm font-medium text-fg group-hover:text-accent transition-colors">GitHub</span>
             </a>
           </div>
         </div>
 
-        {/* PORTRAIT */}
-        <div className="md:w-1/3 flex justify-center md:justify-end">
-          <div className="w-56 h-56 md:w-72 md:h-72 rounded-full border-4 border-redAccent relative overflow-hidden bg-offWhite shrink-0 shadow-2xl">
+        <div className="md:w-2/5 flex justify-center md:justify-end">
+          <div className="w-64 h-64 md:w-[350px] md:h-[350px] relative bg-transparent shrink-0">
             <Image 
               src="/images/face.png" 
               alt="Cyrus Wise" 
               fill
-              className="object-cover transition-all duration-500"
+              className="object-contain transition-all duration-500 brightness-0 dark:invert"
+              style={{ filter: 'grayscale(100%)' }}
               priority 
             />
           </div>
         </div>
       </motion.section>
 
-      {/* EDUCATION */}
       <motion.section 
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
         variants={fadeUp}
-        className="border-none pb-16 pt-8"
+        className="border-none pb-16 pt-8 px-4 md:px-0"
       >
-        <h3 className="text-xl font-bold tracking-widest uppercase mb-8 flex items-center gap-4">
-          <span className="w-8 h-[2px] bg-redAccent"></span> Education
-        </h3>
-        <div className="flex items-start md:items-center gap-6 group p-8 border border-offWhite/10 bg-offWhite/5 rounded-xl hover:border-offWhite/20 transition-colors">
+        <div className="flex items-center gap-4 mb-8 relative">
+          <div className="absolute left-[-1rem] md:left-[-1.5rem] w-[2px] h-[80%] bg-accent"></div>
+          <h3 className="text-2xl font-serif font-medium text-fg">Education</h3>
+          <div className="w-8 h-[1px] bg-accent opacity-60"></div>
+        </div>
+        
+        <div className="flex flex-col md:flex-row items-start md:items-center gap-6 group p-8 border-2 border-border bg-transparent rounded-xl hover:border-fg/20 transition-colors">
           <div className="w-16 h-16 shrink-0 relative overflow-hidden group-hover:scale-105 transition-transform duration-500">
             <img 
               src="https://upload.wikimedia.org/wikipedia/commons/a/a1/Seal_of_University_of_California%2C_Berkeley.svg" 
               alt="UC Berkeley Seal" 
-              className="w-full h-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500"
+              className="w-full h-full object-contain grayscale opacity-80 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-500"
             />
           </div>
           <div>
-            <h4 className="text-xl md:text-2xl font-bold text-white">University of California, Berkeley</h4>
-            <p className="text-offWhite/80 font-medium mt-1 text-sm md:text-base">B.S. Electrical Engineering & Computer Sciences, Minor in Data Science</p>
-            <p className="text-sm font-bold tracking-widest uppercase text-offWhite/60 mt-2">Expected 2026</p>
+            <h4 className="text-xl md:text-2xl font-medium font-serif text-fg">University of California, Berkeley</h4>
+            <p className="text-muted font-normal mt-2 text-sm md:text-base">B.S. Electrical Engineering & Computer Sciences, Minor in Data Science</p>
+            <p className="text-sm font-medium text-muted/70 mt-2">Expected 2026</p>
           </div>
         </div>
       </motion.section>
 
-      {/* EXPERIENCE */}
       <motion.section 
         id="experience"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
         variants={fadeUp}
-        className="border-none py-16"
+        className="border-none py-16 px-4 md:px-0"
       >
-        <h3 className="text-xl font-bold tracking-widest uppercase mb-8 flex items-center gap-4">
-          <span className="w-8 h-[2px] bg-redAccent"></span> Experience
-        </h3>
+        <div className="flex items-center gap-4 mb-8 relative">
+          <div className="absolute left-[-1rem] md:left-[-1.5rem] w-[2px] h-[80%] bg-accent"></div>
+          <h3 className="text-2xl font-serif font-medium text-fg">Experience</h3>
+          <div className="w-8 h-[1px] bg-accent opacity-60"></div>
+        </div>
         
-        <div className="border-t border-b border-dashed border-offWhite/30 py-2">
+        <div className="border-t-2 border-border py-2">
           {groupedExperiences.map((group, index) => {
             const hasLink = group.link && group.link !== '#' && group.link !== '';
 
             const ExperienceContentInner = (
               <div className="flex items-start gap-6 w-full">
-                <div className="w-12 h-12 shrink-0 bg-white rounded flex items-center justify-center relative overflow-hidden mt-1 md:mt-0">
+                <div className="w-12 h-12 shrink-0 bg-white rounded flex items-center justify-center relative overflow-hidden mt-1 md:mt-0 p-2 opacity-90 group-hover:opacity-100 transition-opacity">
                   <Image src={group.image} alt={group.company} fill className="object-contain p-2" />
                 </div>
                 <div className="flex-1 w-full">
-                  <h4 className={`text-xl font-bold flex items-center gap-2 transition-colors ${hasLink ? 'group-hover:text-redAccent' : ''}`}>
+                  <h4 className={`text-xl font-medium font-serif flex items-center gap-2 transition-colors text-fg ${hasLink ? 'group-hover:text-accent' : ''}`}>
                     {group.company}
                     {hasLink && (
-                      <svg className="w-4 h-4 opacity-0 -translate-x-2 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-300 text-redAccent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+                      <svg className="w-4 h-4 opacity-0 -translate-x-2 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-300 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
                     )}
                   </h4>
 
-                  {/* Roles Branching Container */}
-                  <div className="mt-1 flex flex-col gap-4 relative">
-                    {/* Vertical line branch indicator for multiple roles */}
+                  <div className="mt-2 flex flex-col gap-5 relative">
                     {group.roles.length > 1 && (
-                      <div className="absolute left-[-42px] top-4 bottom-3 w-[2px] bg-offWhite/20 hidden md:block"></div>
+                      <div className="absolute left-[-42px] top-4 bottom-3 w-[1px] bg-border hidden md:block"></div>
                     )}
                     
                     {group.roles.map((r: any) => (
                       <div key={r.id} className="flex flex-col w-full relative group/role">
-                        {/* Horizontal line branch junction for multiple roles */}
                         {group.roles.length > 1 && (
-                          <div className="absolute left-[-42px] top-[10px] w-4 h-[2px] bg-offWhite/20 hidden md:block"></div>
+                          <div className="absolute left-[-42px] top-[10px] w-4 h-[1px] bg-border hidden md:block"></div>
                         )}
                         
                         <div className="flex flex-col md:flex-row md:items-center justify-between w-full">
-                          <p className="text-offWhite/60 text-sm font-normal">
+                          <p className="text-muted text-sm font-normal">
                             {r.role}
                           </p>
-                          <div className="text-sm font-bold tracking-widest uppercase text-offWhite/50 md:text-right mt-1 md:mt-0 shrink-0">
+                          <div className="text-sm font-medium text-muted/70 md:text-right mt-1 md:mt-0 shrink-0">
                             {r.date}
                           </div>
                         </div>
 
-                        {/* Description Line */}
                         {r.description && (
-                          <p className="text-offWhite/50 text-[13px] italic mt-1.5 md:pr-12">
+                          <p className="text-muted/80 text-[13.5px] leading-relaxed mt-2 md:pr-12">
                             {r.description}
                           </p>
                         )}
@@ -219,7 +211,7 @@ export default function Home() {
               </div>
             );
 
-            const containerClasses = "flex flex-col md:flex-row md:items-start justify-between py-6 border-b border-dashed border-offWhite/20 last:border-0 group hover:bg-offWhite/5 transition-colors px-4 -mx-4 rounded-lg block";
+            const containerClasses = "flex flex-col md:flex-row md:items-start justify-between py-8 border-b-2 border-border last:border-0 group hover:bg-fg/[0.02] transition-colors px-4 -mx-4 rounded-lg block";
 
             return hasLink ? (
               <a key={index} href={group.link} target="_blank" rel="noreferrer" className={containerClasses}>
@@ -234,41 +226,41 @@ export default function Home() {
         </div>
       </motion.section>
 
-      {/* PROJECTS */}
       <motion.section 
         id="projects"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
         variants={fadeUp}
-        className="border-none py-16"
+        className="border-none py-16 px-4 md:px-0"
       >
-        <h3 className="text-xl font-bold tracking-widest uppercase mb-8 flex items-center gap-4">
-          <span className="w-8 h-[2px] bg-redAccent"></span> Projects
-        </h3>
+        <div className="flex items-center gap-4 mb-8 relative">
+          <div className="absolute left-[-1rem] md:left-[-1.5rem] w-[2px] h-[80%] bg-accent"></div>
+          <h3 className="text-2xl font-serif font-medium text-fg">Projects</h3>
+          <div className="w-8 h-[1px] bg-accent opacity-60"></div>
+        </div>
         
-        {/* Changed border-solid to border-dashed to match experience section */}
-        <div className="border-t border-b border-dashed border-offWhite/30 py-2">
+        <div className="border-t-2 border-border py-2">
           {projects.map((project) => {
             const hasLink = project.link && project.link !== '#' && project.link !== '';
 
             const Content = (
                <>
                  <div className="md:w-2/3 pr-4">
-                    <h4 className={`text-2xl font-bold mb-2 flex items-center gap-2 transition-colors ${hasLink ? 'group-hover:text-redAccent' : ''}`}>
+                    <h4 className={`text-xl font-medium font-serif mb-3 flex items-center gap-2 transition-colors text-fg ${hasLink ? 'group-hover:text-accent' : ''}`}>
                       {project.title}
                       {hasLink && (
-                        <svg className="w-5 h-5 opacity-0 -translate-x-2 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-300 text-redAccent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+                        <svg className="w-4 h-4 opacity-0 -translate-x-2 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-300 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
                       )}
                     </h4>
-                    <p className="text-offWhite/70 text-sm leading-relaxed">{project.description}</p>
+                    <p className="text-muted/90 text-sm leading-relaxed">{project.description}</p>
                  </div>
-                 <div className="md:w-1/3 mt-4 md:mt-0 flex flex-wrap gap-2 md:justify-end content-start">
+                 <div className="md:w-1/3 mt-4 md:mt-0 flex flex-wrap gap-2 md:justify-end content-start opacity-80 group-hover:opacity-100 transition-opacity">
                     {project.tags.map((tag) => {
                       const iconUrl = getTagIcon(tag);
                       return (
-                        <span key={tag} className="text-[10px] font-bold tracking-widest border border-offWhite/20 px-2 py-1 rounded text-offWhite/60 bg-navy flex items-center gap-1.5">
-                          {iconUrl && <img src={iconUrl} alt={tag} className="w-3 h-3" />}
+                        <span key={tag} className="text-[11px] font-medium tracking-wide border-2 border-border px-2.5 py-1 rounded-md text-muted bg-transparent flex items-center gap-1.5">
+                          {iconUrl && <img src={iconUrl} alt={tag} className="w-3 h-3 grayscale" />}
                           {tag}
                         </span>
                       );
@@ -277,8 +269,7 @@ export default function Home() {
                </>
             );
 
-            // Changed border-solid to border-dashed to match experience section
-            const containerClasses = "flex flex-col md:flex-row md:items-start justify-between py-6 border-b border-dashed border-offWhite/20 last:border-0 hover:bg-offWhite/5 transition-colors px-4 -mx-4 rounded-lg block group";
+            const containerClasses = "flex flex-col md:flex-row md:items-start justify-between py-8 border-b-2 border-border last:border-0 hover:bg-fg/[0.02] transition-colors px-4 -mx-4 rounded-lg block group";
 
             return hasLink ? (
               <a key={project.id} href={project.link} target="_blank" rel="noreferrer" className={containerClasses}>
@@ -293,20 +284,18 @@ export default function Home() {
         </div>
       </motion.section>
 
-      {/* CONTACT */}
       <motion.section 
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
         variants={fadeUp}
-        className="border-none py-24 text-center"
+        className="border-none py-32 text-center"
       >
-        <h2 className="text-4xl md:text-5xl font-extrabold mb-6">LET'S BUILD.</h2>
-        <a href="mailto:cyr@berkeley.edu" className="inline-block bg-offWhite text-navy text-lg font-bold px-8 py-4 hover:bg-redAccent hover:text-offWhite transition-colors">
-          GET IN TOUCH
+        <h2 className="text-4xl md:text-5xl font-serif font-medium mb-8 text-fg">Let's build.</h2>
+        <a href="mailto:cyr@berkeley.edu" className="inline-block bg-fg text-bg text-sm font-medium tracking-wide px-8 py-4 rounded-lg hover:bg-accent hover:text-fg transition-colors">
+          Get in touch
         </a>
       </motion.section>
-
     </main>
   );
 }

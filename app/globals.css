@@ -1,26 +1,39 @@
 @import "tailwindcss";
 
 @theme {
-  --color-navy: #1a202c;
-  --color-redAccent: #e50000;
-  --color-offWhite: #fafafa;
+  --color-bg: var(--bg);
+  --color-fg: var(--fg);
+  --color-accent: var(--accent);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
 }
 
 @layer base {
-  /* Global fix for horizontal scrolling */
+  :root {
+    --bg: #fefefe;
+    --fg: #1a202c;
+    --accent: #e50000;
+    --muted: rgba(26, 32, 44, 0.6);
+    --border: rgba(26, 32, 44, 0.1);
+  }
+
+  .dark {
+    --bg: #1a202c;
+    --fg: #fafafa;
+    --accent: #e50000;
+    --muted: rgba(250, 250, 250, 0.6);
+    --border: rgba(250, 250, 250, 0.1);
+  }
+
   html,
   body {
-    max-width: 100vw;
-    /* Using 'clip' instead of 'hidden' fixes horizontal scrolling without breaking position: sticky */
     overflow-x: clip;
   }
 
   body {
-    /* Main background is now Navy */
-    @apply bg-navy text-offWhite font-sans;
+    @apply bg-bg text-fg font-sans transition-colors duration-300;
   }
   
-  /* Resetting borders for new layered structure */
   section {
     @apply border-none py-16;
   }
