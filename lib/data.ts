@@ -171,7 +171,7 @@ export const projects: Project[] = [
     what: 'Implemented a computer vision model utilizing Rapid Serial Visual Presentation, eye-tracking, and intelligent formula parsing.',
     insight: 'The constraint: processing dense, complex material while maintaining the low latency required for real-time tracking.',
     tags: ['OPENCV', 'REACT', 'FLASK', 'PYTHON'],
-    link: '#'
+    link: 'https://www.linkedin.com/company/harpresearch'
   },
   // {
   //   id: 'script-gen',
