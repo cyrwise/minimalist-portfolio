@@ -13,7 +13,7 @@ const fadeUp: Variants = {
 };
 
 const getTagData = (tag: string) => {
-  const data: Record<string, { icon: string, url: string }> = {
+  const data: Record<string, { icon: string; url: string }> = {
     'SWIFT': { icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/swift/swift-original.svg', url: 'https://developer.apple.com/swift/' },
     'SWIFTUI': { icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/swift/swift-original.svg', url: 'https://developer.apple.com/xcode/swiftui/' },
     'FIREBASE': { icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/firebase/firebase-plain.svg', url: 'https://firebase.google.com/' },
@@ -26,7 +26,11 @@ const getTagData = (tag: string) => {
     'FLASK': { icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/flask/flask-original.svg', url: 'https://flask.palletsprojects.com/' },
     'C++': { icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/cplusplus/cplusplus-original.svg', url: 'https://isocpp.org/' },
     'TENSORFLOW': { icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tensorflow/tensorflow-original.svg', url: 'https://www.tensorflow.org/' },
-    'DOCKER': { icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg', url: 'https://www.docker.com/' }
+    'DOCKER': { icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg', url: 'https://www.docker.com/' },
+    'NEXT.JS': { icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg', url: 'https://nextjs.org/' },
+    'SUPABASE': { icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/supabase/supabase-original.svg', url: 'https://supabase.com/' },
+    'STRIPE': { icon: 'https://cdn.simpleicons.org/stripe', url: 'https://stripe.com/' },
+    'RESEND': { icon: 'https://cdn.simpleicons.org/resend', url: 'https://resend.com/' }
   };
   return data[tag] || null;
 };
@@ -58,14 +62,26 @@ export default function Projects() {
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-border border-[1px] border-border">
         {projects.map((project: any) => (
-          <div key={project.id} className="group bg-bg p-8 hover:bg-fg/[0.015] dark:hover:bg-fg/[0.03] transition-all flex flex-col justify-between min-h-[350px]">
-            <div>
+          <div key={project.id} className="group relative bg-bg p-8 hover:bg-fg/[0.015] dark:hover:bg-fg/[0.03] transition-all flex flex-col justify-between min-h-[350px]">
+            
+            {/* Full Card Clickable Overlay */}
+            {project.link !== '#' && (
+              <a 
+                href={project.link} 
+                target="_blank" 
+                rel="noreferrer" 
+                className="absolute inset-0 z-10"
+                aria-label={`View ${project.title}`}
+              />
+            )}
+
+            <div className="relative z-0">
               <div className="flex items-center justify-between mb-6">
                 <h4 className="text-2xl font-serif group-hover:text-accent transition-colors">{project.title}</h4>
                 {project.link !== '#' && (
-                  <a href={project.link} target="_blank" rel="noreferrer" className="text-accent opacity-0 group-hover:opacity-100 transition-opacity">
+                  <div className="text-accent opacity-0 group-hover:opacity-100 transition-opacity">
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
-                  </a>
+                  </div>
                 )}
               </div>
               
@@ -85,7 +101,8 @@ export default function Projects() {
               </div>
             </div>
 
-            <div className="flex flex-wrap gap-2 mt-auto pt-4 border-t-[1px] border-border/50">
+            {/* Elevated z-index so tech stack tags remain clickable over the card link */}
+            <div className="relative z-20 flex flex-wrap gap-2 mt-auto pt-4 border-t-[1px] border-border/50">
               {project.tags.map((tag: string) => {
                 const tagData = getTagData(tag);
                 return tagData ? (

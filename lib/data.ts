@@ -1,5 +1,14 @@
 export const experiences = [
   {
+    id: 'mylyfe',
+    company: 'My Lyfe',
+    role: 'Software Engineering Intern',
+    date: 'May 2026 - Present',
+    image: '/images/my_lyfe-logo.jpg',
+    link: 'https://mylyfeapp.com/',
+    description: 'Incoming Software Engineering Intern selected for cross-platform (React Native) mobile and web app development at an early-stage social media startup. Excited to intertwine my love for content creation and programming.'
+  },
+  {
     id: 'ucb1',
     company: 'University of California, Berkeley',
     role: 'Co-Reader / Grader',
@@ -138,6 +147,15 @@ export const projects: Project[] = [
     link: '#' // Add your project links here when ready
   },
   {
+    id: 'ecommerce',
+    title: 'Brand Ecommerce Platform',
+    why: 'Monolithic platforms like Shopify restrict aesthetic control; I wanted to engineer a fully custom, zero-touch retail architecture from scratch.',
+    what: 'Architected a custom Next.js storefront integrating Stripe and Printful APIs for automated fulfillment, live taxes, and catalog state management.',
+    insight: 'The core challenge was architecting a zero-touch logistics engine that felt entirely native, bypassing monolithic constraints to control the entire conversion funnel.',
+    tags: ['NEXT.JS', 'SUPABASE', 'STRIPE', 'RESEND'],
+    link: '/via/store'
+  },
+  {
     id: 'transfer-ai',
     title: 'Transfer Pathway AI',
     why: 'The university transfer process is structurally opaque; I wanted to build a clear, data-driven bridge to top institutions.',
@@ -155,13 +173,13 @@ export const projects: Project[] = [
     tags: ['OPENCV', 'REACT', 'FLASK', 'PYTHON'],
     link: '#'
   },
-  {
-    id: 'script-gen',
-    title: 'Script & Engagement Gen',
-    why: 'Marketing teams burn thousands of hours guessing what resonates; I wanted to mathematically solve engagement.',
-    what: 'Created an automated pipeline integrating TensorFlow and Facebook Ads APIs to analyze video performance and generate converting scripts.',
-    insight: 'The focus was embedding heavy neural network inference natively into a highly scalable C++ backend.',
-    tags: ['PYTHON', 'C++', 'TENSORFLOW', 'DOCKER'],
-    link: '#'
-  }
+  // {
+  //   id: 'script-gen',
+  //   title: 'Script & Engagement Gen',
+  //   why: 'Marketing teams burn thousands of hours guessing what resonates; I wanted to mathematically solve engagement.',
+  //   what: 'Created an automated pipeline integrating TensorFlow and Facebook Ads APIs to analyze video performance and generate converting scripts.',
+  //   insight: 'The focus was embedding heavy neural network inference natively into a highly scalable C++ backend.',
+  //   tags: ['PYTHON', 'C++', 'TENSORFLOW', 'DOCKER'],
+  //   link: '#'
+  // }
 ];

@@ -98,7 +98,7 @@ export default function Education() {
 
           <div className="mt-6 flex items-center justify-center gap-2 border-[1px] border-accent px-3 py-1.5 rounded-sm bg-accent/5 group-hover:bg-accent/10 transition-colors">
             <div className="w-1.5 h-1.5 bg-accent rounded-full animate-pulse"></div>
-            <span className="text-[9px] font-mono text-accent tracking-widest">Exp Grad: 2027 — 2028</span>
+            <span className="text-[9px] font-mono text-accent tracking-widest">2023 — Present</span>
           </div>
 
           <div className="absolute -top-3 -right-3 px-3 py-1.5 bg-bg border-[1px] border-border text-[10px] font-mono text-muted uppercase tracking-widest shadow-sm">Currently Here</div>
