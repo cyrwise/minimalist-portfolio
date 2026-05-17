@@ -35,7 +35,7 @@ export default function ResumePage() {
         </div>
 
         <motion.a
-          href="/resume.pdf"
+          href="/Cyrus_Wise_Resume.pdf"
           download
           className="flex items-center gap-3 border-2 border-border px-8 py-3 text-sm font-medium tracking-wide uppercase transition-all rounded-lg bg-transparent text-fg hover:border-accent hover:bg-accent hover:text-white group transition-none w-full md:w-auto justify-center"
         >
@@ -54,7 +54,7 @@ export default function ResumePage() {
 
       <div className="w-full flex-grow rounded-xl overflow-hidden border-2 border-dashed border-border bg-transparent p-1">
         <iframe
-          src="/resume.pdf"
+          src="/Cyrus_Wise_Resume.pdf"
           className="w-full h-full rounded-lg"
           title="Cyrus Wise Resume"
         />
